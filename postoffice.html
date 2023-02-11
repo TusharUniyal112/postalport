@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POSTAL PINCORD</title>
+    <link rel="stylesheet" href="/postoffice.css">
+    <link rel="shortcut icon" href="/India Post LOGO.jpg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+    <!-- <script src="/postoffice.js"></script> -->
+</head>
+<body>
+    <!-- axion file -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <!-- html code start here  -->
+    <nav>
+        <img src="https://services.india.gov.in/assets/images/emblem-dark.png" alt="" srcset="" id="img1">
+       <h1 id="hist">National Government Services Portal</h1>  <span id="span1" class="find_services">Find Government Services Faster</span>
+       <a> <img id="img2" src="/India Post LOGO.jpg"  alt="" srcset=""></a>
+       
+    </nav>
+    <form id="form1">
+        <input type="text" name="" id="pincordbox" placeholder="ENTER YOUR PIN-CODE">
+        <button id="submitbtn">FIND POST OFFICE</button>
+    </form>
+        
+
+
+            <div id="articlediv">
+                <h2 id="h2">Find Postal Pincode</h2>
+                    <p id="p1">PIN Code is the postal Identification number used to track the post office locations in India.
+                     Its a unique 6 digit code alloted to various parts in the country. First two digits of the PINCODE denote the state information.
+                        Postalpincodefor.com is used to find the pincode of any area in India.
+                         You can get the Pincode or area by clicking either name or Pincode. We have listed more than lakh postal pincode in postalpincodefor.com.
+                        </p>
+                       
+            </div>
+            <div id="ol">
+                <ol>
+                    <li> Find Pincode | PIN CODE</li>
+                    <li> Find Post Pincode</li>
+                    <li> Post office Location</li>
+                    <li>  Post office Address</li>
+                    <li> Courier Pincode</li>
+                <li>   List of Pincodes in a City</li>
+                <li>District wise Pincodes</li>
+            </ol>
+        </div>
+    
+           
+    <table id="table">
+        
+     </table>
+
+    <script>
+        // alert("this website is unresponsive because , coder of this website was lazy zzzzzzzzzzzzzzzzz")
+        let postalForm = document.querySelector("#form1")
+let pincordBox = document.querySelector("#pincordbox")
+let submitBtn = document.querySelector("#submitbtn")
+let tb = document.querySelector("#tb")
+let table = document.querySelector("#table")
+
+// removing refresh bug from the website
+ postalForm.addEventListener("submit", async (e)=>{e.preventDefault()
+    resettext()
+    resetbody()
+    let inputvalue = pincordBox.value;
+    let fetching =await axios.get(`https://api.postalpincode.in/pincode/${inputvalue}`)
+    mainData =fetching.data[0].PostOffice
+    // console.log(mainData) 
+    for(postofficeid of mainData){ 
+    let tbone = document.createElement("tbody")
+    tbone.classList.add("tbone")
+    
+    for(let key in postofficeid){
+
+        let tr=  document.createElement("tr")
+        let td=  document.createElement("td")
+        td.innerText=`${key} : ${postofficeid[key]}`
+        td.classList.add("tablerow")
+        
+        tr.appendChild(td) 
+        tbone.appendChild(tr)   
+        table.appendChild(tbone)
+        document.body.appendChild(table)
+        // console.log(  `${key} ${postofficeid[key]}`)
+    
+    
+        
+        
+
+
+
+
+
+    }
+    
+}
+})
+function resettext(){
+    const trr = document.querySelectorAll("tr")
+    for (z of trr ){
+        z.remove()
+    }
+
+}
+
+function resetbody(){
+    const trb = document.querySelectorAll("tb")
+    for (z of trb ){
+        z.remove()
+    }
+}
+
+
+    </script>
+    <!-- var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    var span = document.createElement("span");
+    var text = document.createTextNode("something here..");
+    span.appendChild(text);
+    td.appendChild(span);
+    tr.appendChild(td);
+    
+    tbody.appendChild(tr); -->
+
+    
+</body>
+</html>
